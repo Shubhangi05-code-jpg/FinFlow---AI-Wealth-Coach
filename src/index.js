@@ -1,16 +1,20 @@
 import dotenv from "dotenv"
 import connectDB from "./db/index.js";
-import express from "express"
+import app from "app.js"
+
 dotenv.config({
     path:"./env"
 })
 connectDB()
-
-const app = express();
-
-app.listen(`${process.env.PORT}`, ()=>{
-    console.log("listening on port");
+.then(() => {
+    app.listen(process.env.PORT || 3000, ()=>{
+        console.log("Listening on port")
+    })
 })
+.catch((err) =>{
+    console.log("Mongoose connection failed");
+})
+
 
 
 
